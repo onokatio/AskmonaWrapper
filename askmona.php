@@ -56,13 +56,6 @@ class Askmona{
 		return $this->http("https://askmona.org/v1/users/profile?u_id={$u_id}");
 	}
 }
-
-
-	$askmona = new Askmona();
-	echo $askmona->res(3442,1)->responses->u_name."\n";
-	echo $askmona->user(1)->u_name."\n";
-	echo $askmona->topics(1)->topics->title;
-
 ?>
 
 
