@@ -18,7 +18,7 @@
  #    #  #   ##  #    #  #   #   #    #     #       #    #    #
   ####   #    #   ####   #    #  #    #     #       #     ####
 
-*/
+//*/
 namespace Askmona;
 
 define('HOSTNAME','https://askmona.org/v1/');
@@ -28,11 +28,20 @@ class Askmona{
 	private $zero_flags = 0; // FALSE:make0 TRUE:dont make 0
 	const HOST = HOSTNAME;
 	
-	private $addres = '';
-	private $passward = '';
+	private $address = '';
+	private $password = '';
 	private $token = '';
 	
 	private function throw_ecp(string $message) {throw new Exception($message);}  //throw ecp as func
+	
+	public function __construct(string $address = '', string $password = ''){
+		if( empty($password) ){
+			$this->token = $address;
+		}else{
+			$this->address = $address;
+			$this->password = $password;
+		}
+	}
 	
 	private function http(string $url, string $post=''){ //send http request
 		$option = array('http' => array(
@@ -41,13 +50,13 @@ class Askmona{
 			'header' => 'Content-Length: '.strlen($post),
 			'content' => $post,
 		));
-		$return = json_decode(file_get_contents($url,false,stream_context_create($option)));
+		$return = json_decode(file_get_contents($url,NULL,stream_context_create($option)));
 		!$return->status && self::throw_ecp("error: {$return->error}");
 		return $return;
 	}
 
 
-	public function topics(int $limit=0,int $offset=0) {
+	public function topics(int $limit=0,int $offset=0){
 		!$limit && $limit=25;
 		$return = self::http(self::HOST."topics/list?limit={$limit}&offset={$offset}");
 		isset($this) && $this->zero_flags && count($return->topics)===1 && $return->topics = $return->topics[0];
