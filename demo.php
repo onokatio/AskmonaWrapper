@@ -1,5 +1,5 @@
 <?php
-	require('src/onokatio/AskmonaWrapper/Askmona.php');
+	require('vendor/autoload.php');
 	use onokatio\AskmonaWrapper\Askmona;
 
 	foreach(Askmona::topics(3)->topics as $topic) echo($topic->title."\n");
