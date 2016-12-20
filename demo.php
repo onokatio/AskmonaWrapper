@@ -1,13 +1,10 @@
 <?php
-	require('askmona.php');
+	require('Askmona.php');
+	use Askmona\Askmona;
 
-	use Askmona\askmona;
+	foreach(Askmona::topics(3)->topics as $topic) echo($topic->title."\n");
 
-	$topicslist = Askmona::topics(10);
-	for($i=0;$i<10;$i++) printf($topicslist->topics[$i]->title."\n");
+	foreach(Askmona::res(1,1,3)->responses as $response) echo($response->response."\n");
 
-	$reslist = Askmona::res(1,1,10);
-	for($i=0;$i<10;$i++) printf($reslist->responses[$i]->response."\n");
-
-	echo Askmona::user(1)->u_name;
+	echo(Askmona::user(1)->u_name);
 ?>
