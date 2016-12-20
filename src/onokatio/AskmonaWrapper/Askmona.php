@@ -19,7 +19,7 @@
   ####   #    #   ####   #    #  #    #     #       #     ####
 
 //*/
-namespace onokatio\ask-mona-api-wrapper;
+namespace onokatio\AskmonaWrapper;
 
 define('HOSTNAME','https://askmona.org/v1/');
 

@@ -1,6 +1,6 @@
 <?php
-	require('Askmona.php');
-	use Askmona\Askmona;
+	require('src/onokatio/AskmonaWrapper/Askmona.php');
+	use onokatio\AskmonaWrapper\Askmona;
 
 	foreach(Askmona::topics(3)->topics as $topic) echo($topic->title."\n");
 

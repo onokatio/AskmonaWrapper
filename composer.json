@@ -1,10 +1,10 @@
 {
-	"name": "onokatio/ask-mona-api-wrapper",
+	"name": "onokatio/AskmonaWrapper",
 	"description": "askmona.org api wrapper for php",
 	"keywords": ["api", "wrapper", "askmona"],
 	"type": "library",
 	"license": "GPL-3.0",
-	"homepage": "https://github.com/onokatio/ask-mona-api-wrapper",
+	"homepage": "https://github.com/onokatio/AskmonaWrapper",
 	"authors": [
 	{
 		"name": "onokatio",
@@ -16,7 +16,7 @@
 	},
 	"autoload": {
 		"psr-0": {
-			"onokatio\\ask-mona-api-wrapper": "src/"
+			"onokatio\\AskmonaWrapper": "src/"
 		}
 	}
 }
