@@ -11,6 +11,9 @@
 		"email": "onokatio@gmail.com"
 	}
 	],
+	"require": {
+		"php": ">=7.1"
+	},
 	"autoload": {
 		"psr-0": {
 			"onokatio\\ask-mona-api-wrapper": "src/"
