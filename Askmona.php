@@ -32,9 +32,7 @@ class Askmona{
 	private $passward = '';
 	private $token = '';
 	
-	private function throw_ecp(string $message) { //throw exception by function
-		throw new Exception($message);
-	}
+	private function throw_ecp(string $message) {throw new Exception($message);}  //throw ecp as func
 	
 	private function http(string $url, string $post=''){ //send http request
 		$option = array('http' => array(
