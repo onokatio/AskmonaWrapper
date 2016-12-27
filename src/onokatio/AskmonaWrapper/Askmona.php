@@ -22,6 +22,7 @@
 namespace onokatio\AskmonaWrapper;
 
 define('HOSTNAME','https://askmona.org/v1/');
+define('DEBKEY','input default dev key here.');
 
 
 class Askmona{
@@ -31,6 +32,7 @@ class Askmona{
 	private $address = '';
 	private $password = '';
 	private $token = '';
+	private $devkey = DEBKEY;
 	
 	private function throw_ecp(string $message) {throw new Exception($message);}  //throw ecp as func
 	
@@ -52,12 +54,12 @@ class Askmona{
 		));
 		$return = json_decode(file_get_contents($url,NULL,stream_context_create($option)));
 		!$return->status && self::throw_ecp("error: {$return->error}");
+		isset($this) ? $return->_ = $this : $return->_ = new Self;
 		return $return;
 	}
 
 
-	public function topics(int $limit=0,int $offset=0){
-		!$limit && $limit=25;
+	public function topics(int $limit=25,int $offset=0){
 		$return = self::http(self::HOST."topics/list?limit={$limit}&offset={$offset}");
 		isset($this) && $this->zero_flags && count($return->topics)===1 && $return->topics = $return->topics[0];
 		return $return;

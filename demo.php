@@ -7,6 +7,13 @@
 	foreach(Askmona::res(1,1,3)->responses as $response) echo($response->response."\n");
 
 	echo(Askmona::user(1)->u_name);
-	
+
+	echo Askmona::user(1)
+	->_
+	->user(1)
+	->_
+	->user(1)->u_name;
+
 	$a = new Askmona();
+	//var_dump($a);
 ?>
