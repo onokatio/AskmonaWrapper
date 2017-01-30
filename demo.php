@@ -13,11 +13,10 @@
 	echo Askmona::get('users/profile',array('u_id'=>1))->u_name;
 
 	$a = new Askmona('UCJn+IU2h2o5JTXfjd5adqgCg8uQHRJOdj9ngfkFOCNc=', 2473, 'A08NRW1v6qTX2zbQnum3EV9EWF0xaexZMJStBskUTmEs=', 2473);
-	var_dump($a);
 	$array = array(
 		't_id'=>3446,
 		'text'=>'without id',
 		'sage'=>1
 	);
-	$a->post('responses/post',$array);
+	var_dump($a->post('responses/post',$array));
 ?>

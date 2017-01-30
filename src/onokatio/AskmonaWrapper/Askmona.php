@@ -19,22 +19,23 @@
   ####   #    #   ####   #    #  #    #     #       #     ####
 
 */
+declare(strict_types=1);
+
 namespace onokatio\AskmonaWrapper;
+class Exception extends \Exception {}
 
 define('HOSTNAME','https://askmona.org/v1/');
-define('DEVKEY','input default developer key here.');
+define('DEVKEY','input default developer key');
 define('DEVID',0);
 
-
-
-class Askmona{
+class Askmona {
 	private $token = '';
-	private $devkey = DEVKEY;
+	private $devkey = '';
 	private $id = array(
 		'u_id' => 0,
-		'app_id' => DEVID
+		'app_id' => 0,
 	);
-	
+
 	public function __construct(string $token, int $u_id, string $devkey = '', int $app_id = 0){
 		$this->token = $token;
 		$this->id['u_id'] = $u_id;
@@ -44,7 +45,7 @@ class Askmona{
 	
 	private function throw_ecp(string $message) {throw new Exception($message);}  //throw ecp as func
 	
-	public function Auth(){
+	private function Auth(): array{
 		$nonce = base64_encode(random_bytes(32));
 		$time = time();
 		return array(
@@ -54,16 +55,17 @@ class Askmona{
 		);
 	}
 	
-	public function get(string $url, $query){ //send http request
+	public function get(string $url, array $query){ //send http request
 		$query = http_build_query($query);
 		$return = file_get_contents(HOSTNAME.$url.'?'.$query);
 		$return = json_decode($return);
-//		$return->status || self::throw_ecp("error: {$return->error}");
-		isset($this) &&  $return->_ = $this;
+		$return->status || self::throw_ecp("error: {$return->error}");
 		return $return;
 	}
 	
-	public function post(string $url, $query){ //send http request
+	public function post(string $url, array $query){ //send http request
+//		( isset($this) || 
+
 		$query = http_build_query(array_merge($query,$this->Auth(),$this->id));
 		$headers = array(
 			'Content-Type: application/x-www-form-urlencoded',
@@ -77,7 +79,7 @@ class Askmona{
 		));
 		$return = file_get_contents(HOSTNAME.$url,false,stream_context_create($option));
 		$return = json_decode($return);
-//		$return->status || self::throw_ecp("error: {$return->error}");
+		$return->status || self::throw_ecp("error: {$return->error}");
 		isset($this) && $return->_ = $this;
 		return $return;
 	}
