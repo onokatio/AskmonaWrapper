@@ -25,8 +25,6 @@ namespace onokatio\AskmonaWrapper;
 class Exception extends \Exception {}
 
 define('HOSTNAME','https://askmona.org/v1/');
-define('DEVKEY','input default developer key');
-define('DEVID',0);
 
 class Askmona {
 	private $token = '';
@@ -46,6 +44,7 @@ class Askmona {
 	private function throw_ecp(string $message) {throw new Exception($message);}  //throw ecp as func
 	
 	private function Auth(): array{
+		( empty($this->devkey) || empty($this->token) ) && self::throw_ecp("\nエラー: アプリケーションキーか管理者IDが登録されていません。");
 		$nonce = base64_encode(random_bytes(32));
 		$time = time();
 		return array(
@@ -59,12 +58,12 @@ class Askmona {
 		$query = http_build_query($query);
 		$return = file_get_contents(HOSTNAME.$url.'?'.$query);
 		$return = json_decode($return);
-		$return->status || self::throw_ecp("error: {$return->error}");
+		$return->status || self::throw_ecp("\nAskmona.orgからのエラー: {$return->error}");
 		return $return;
 	}
 	
 	public function post(string $url, array $query){ //send http request
-//		( isset($this) || 
+		isset($this) || self::throw_ecp("\nエラー: postを利用するにはインスタンスを生成する必要があります。");
 
 		$query = http_build_query(array_merge($query,$this->Auth(),$this->id));
 		$headers = array(
@@ -79,8 +78,8 @@ class Askmona {
 		));
 		$return = file_get_contents(HOSTNAME.$url,false,stream_context_create($option));
 		$return = json_decode($return);
-		$return->status || self::throw_ecp("error: {$return->error}");
-		isset($this) && $return->_ = $this;
+		$return->status || self::throw_ecp("\nAskmona.orgからのエラー: {$return->error}");
+		$return->_ = $this;
 		return $return;
 	}
 }
