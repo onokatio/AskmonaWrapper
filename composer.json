@@ -1,5 +1,5 @@
 {
-	"name": "onokatio/AskmonaWrapper",
+	"name": "onokatio/Askmona",
 	"description": "askmona.org api wrapper for php",
 	"keywords": ["api", "wrapper", "askmona"],
 	"type": "library",
