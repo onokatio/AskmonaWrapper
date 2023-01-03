@@ -26,7 +26,7 @@
 
 	//トピックID3446にsage有効で「てすと」と投稿してみる
 	//今はダミーのID・キーが入ってるのでエラーが起こるはずです。
-/*	$a = new Askmona('UCJn+IU2h2o5JTXfjd5adqgCg8uQHRJOdj9ngfkFOCNc=', 2473, 'A08NRW1v6qTX2zbQnum3EV9EWF0xaexZMJStBskUTmEs=', 2473);
+/*	$a = new Askmona('', 2473, '', 2473);
 	$array = array(
 		't_id'=>3446,
 		'text'=>'てすと',
